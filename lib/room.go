@@ -9,12 +9,10 @@ import (
 type Room struct {
 	Title       string `json:"title"`
 	Description string `json:"description"`
-	Cords       Cords
-}
-
-type Cords struct {
-	X string `json:"x"`
-	Y string `json:"y"`
+	Cords       struct {
+		X int `json:"x"`
+		Y int `json:"y"`
+	} `json:"cords"`
 }
 
 func MakeRoom() {
@@ -28,7 +26,6 @@ func ParseRoomList() {
 	var rooms []Room
 	json.Unmarshal(rf, &rooms)
 	for r := range rooms {
-		fmt.Println("this is a roomlist")
-		fmt.Printf("Title: %v, Description: %v, Coords: X - %d Y - %d", rooms[r].Title, rooms[r].Description, rooms[r].Cords.X, rooms[r].Cords.Y)
+		fmt.Printf("Title: %v, Description: %v, Coords: X - %d Y - %d\n", rooms[r].Title, rooms[r].Description, rooms[r].Cords.X, rooms[r].Cords.Y)
 	}
 }
